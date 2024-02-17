@@ -1,0 +1,72 @@
+name: Spring Boot CI
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  soos_sast_analysis_example:
+    name: SOOS SAST Analysis Example
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run SOOS SAST Analysis
+        uses: soos-io/soos-sast-github-action@v1.0.0
+        with:
+          client_id: necqtvcff
+          api_key: NTFiMDRiMWMtNmVkMy00ZTU1LThjYWUtODM0NzQyZjk3MjYz 
+          project_name: "pipeline"
+          scan_mode: "baseline"
+          api_url: "https://api.soos.io/api/"
+          target_url: "https://www.example.com/"
+  soos_dast_analysis_example:
+    name: SOOS DAST Analysis Example
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run SOOS DAST Analysis
+        uses: soos-io/soos-dast-github-action@v2
+        with:
+          client_id: necqtvcff
+          api_key: NTFiMDRiMWMtNmVkMy00ZTU1LThjYWUtODM0NzQyZjk3MjYz
+          project_name: "pipeline"
+          scan_mode: "baseline"
+          api_url: "https://api.soos.io/api/"
+          target_url: "https://www.example.com/"
+      - name: Run SOOS SCA Scan for vulnerabilities
+        uses: soos-io/soos-sca-github-action@v2 # Check the latest major version here: https://github.com/marketplace/actions/soos-core-sca
+        with:
+          project_name: "pipeline"
+          client_id: necqtvcff
+          api_key: "https://api.soos.io/api/"
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+    
+    - name: Cache Maven dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: Build project with Maven
+      run: |
+        cd plantmanagement
+        mvn -B clean install
+
+    - name: Test project with Maven
+      run: |
+        cd plantmanagement
+        mvn test
+
+        
+
+    
+        
