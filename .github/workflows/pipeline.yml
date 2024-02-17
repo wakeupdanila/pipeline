@@ -58,12 +58,12 @@ jobs:
 
     - name: Build project with Maven
       run: |
-        cd plantmanagement
+        cd demo
         mvn -B clean install
 
     - name: Test project with Maven
       run: |
-        cd plantmanagement
+        cd demo
         mvn test
 
         
