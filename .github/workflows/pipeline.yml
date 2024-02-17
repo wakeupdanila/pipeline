@@ -12,7 +12,7 @@ jobs:
         uses: soos-io/soos-sast-github-action@v1
         with:
           client_id: necqtvcff
-          api_key: NTFiMDRiMWMtNmVkMy00ZTU1LThjYWUtODM0NzQyZjk3MjYz
+          api_key: NjQ0YzkyOGMtNThjNy00NWM1LTliZjAtODBlM2RiYzQwMzg5
           project_name: "pipeline"
           scan_mode: "baseline"
           api_url: "https://api.soos.io/api/"
