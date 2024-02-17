@@ -4,32 +4,20 @@ on:
     branches: [ main ]
 
 jobs:
-  soos_sast_analysis_example:
-    name: SOOS SAST Analysis Example
+  soos_dast:
+    name: SOOS DAST
     runs-on: ubuntu-latest
     steps:
-      - name: Run SOOS DAST Analysis
-        uses: soos-io/soos-sast-github-action@v2.0.5
-        with:
-          client_id: necqtvcff
-          api_key: NjQ0YzkyOGMtNThjNy00NWM1LTliZjAtODBlM2RiYzQwMzg5
-          project_name: "pipeline"
-          scan_mode: "baseline"
-          api_url: "https://api.soos.io/api/"
-          target_url: "https://www.example.com/"
-  soos_dast_analysis_example:
-    name: SOOS DAST Analysis Example
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run SOOS DAST Analysis
+      - name: Run SOOS DAST
         uses: soos-io/soos-dast-github-action@v2
         with:
           client_id: necqtvcff
           api_key: NTFiMDRiMWMtNmVkMy00ZTU1LThjYWUtODM0NzQyZjk3MjYz
-          project_name: "pipeline"
+          project_name: "demo"
           scan_mode: "baseline"
-          api_url: "https://api.dast.io/api/"
+          api_url: "https://api.soos.io/api/"
           target_url: "https://www.example.com/"
+  
   build:
     runs-on: ubuntu-latest
 
